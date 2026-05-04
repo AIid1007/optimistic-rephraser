@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Margin Notes — for the thoughts that need a kinder pen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+  :root {
+    --paper: #F2EBDD;
+    --paper-deep: #EBE2CE;
+    --paper-edge: #DDD2B8;
+    --ink: #1C1A14;
+    --ink-soft: #4A4339;
+    --ink-mute: #807665;
+    --ink-faint: #B5A98F;
+    --terracotta: #A0432A;
+    --terracotta-deep: #6E2C1A;
+    --sage: #6F7B5A;
+    --sage-deep: #4A5439;
+    --gold: #B8893E;
+    --rule: #C9BD9F;
+    --shadow: 0 1px 0 #DDD2B8, 0 24px 48px -24px rgba(28,26,20,0.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  body {
+    background-image:
+      radial-gradient(ellipse at top left, rgba(184,137,62,0.04), transparent 60%),
+      radial-gradient(ellipse at bottom right, rgba(160,67,42,0.03), transparent 50%);
+    padding: 0 0 4rem;
+  }
+
+  /* ---------- HEADER ---------- */
+  header {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 1.5rem;
+    text-align: center;
+    position: relative;
+  }
+  .crest {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+    color: var(--ink-mute);
+    font-family: 'Fraunces', serif;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .crest-line { width: 28px; height: 1px; background: var(--ink-faint); }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(38px, 6vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--terracotta-deep);
+    font-weight: 300;
+  }
+  .tagline {
+    margin-top: 1rem;
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-soft);
+  }
+  .header-rule {
+    width: 60px;
+    height: 1px;
+    background: var(--ink-faint);
+    margin: 1.5rem auto 0;
+  }
+
+  /* ---------- COMPOSER ---------- */
+  main { max-width: 720px; margin: 0 auto; padding: 0 1.5rem; }
+  .composer {
+    background: var(--paper-deep);
+    border: 1px solid var(--paper-edge);
+    border-radius: 4px;
+    padding: 2rem;
+    margin-top: 2rem;
+    box-shadow: var(--shadow);
+    position: relative;
+  }
+  .composer::before {
+    content: "";
+    position: absolute;
+    top: 8px; left: 8px; right: 8px; bottom: 8px;
+    border: 1px solid rgba(184,137,62,0.18);
+    border-radius: 2px;
+    pointer-events: none;
+  }
+  .composer-label {
+    font-family: 'Fraunces', serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 1rem;
+    display: block;
+  }
+  textarea {
+    width: 100%;
+    min-height: 120px;
+    background: transparent;
+    border: none;
+    font-family: 'Newsreader', serif;
+    font-size: 21px;
+    line-height: 1.5;
+    color: var(--ink);
+    resize: vertical;
+    outline: none;
+    font-style: italic;
+  }
+  textarea::placeholder {
+    color: var(--ink-faint);
+    font-style: italic;
+  }
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--paper-edge);
+  }
+  .tone-group {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+  .tone-label {
+    font-family: 'Fraunces', serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-right: 8px;
+  }
+  .chip {
+    background: transparent;
+    border: 1px solid var(--ink-faint);
+    color: var(--ink-soft);
+    font-family: 'Newsreader', serif;
+    font-size: 14px;
+    padding: 5px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 160ms ease;
+    font-style: italic;
+  }
+  .chip:hover { border-color: var(--ink-soft); color: var(--ink); }
+  .chip.active {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--paper);
+  }
+  .submit {
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    padding: 12px 28px;
+    font-family: 'Fraunces', serif;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 200ms ease;
+    font-weight: 400;
+  }
+  .submit:hover { background: var(--terracotta-deep); }
+  .submit:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* ---------- DISTORTION PICKER ---------- */
+  .picker {
+    margin-top: 1.5rem;
+    padding: 1.25rem 1.5rem;
+    background: rgba(184,137,62,0.06);
+    border-left: 3px solid var(--gold);
+    border-radius: 2px;
+    display: none;
+  }
+  .picker.show { display: block; animation: fade-in 400ms ease both; }
+  .picker-prompt {
+    font-family: 'Fraunces', serif;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+    font-style: italic;
+  }
+  .picker-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .picker-chip {
+    background: var(--paper);
+    border: 1px solid var(--paper-edge);
+    color: var(--ink-soft);
+    font-family: 'Newsreader', serif;
+    font-size: 14px;
+    padding: 6px 14px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 160ms ease;
+  }
+  .picker-chip:hover {
+    border-color: var(--gold);
+    color: var(--ink);
+    background: var(--paper-deep);
+  }
+  .picker-other {
+    color: var(--ink-mute);
+    font-style: italic;
+    text-decoration: underline;
+    text-decoration-color: var(--ink-faint);
+    text-underline-offset: 3px;
+  }
+
+  /* ---------- CARD ---------- */
+  .card-wrap { margin-top: 2.5rem; }
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--paper-edge);
+    border-radius: 4px;
+    padding: 2.5rem 2.25rem 2rem;
+    position: relative;
+    box-shadow: var(--shadow);
+    animation: rise-in 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .card::before {
+    content: "";
+    position: absolute;
+    top: 10px; left: 10px; right: 10px; bottom: 10px;
+    border: 1px solid rgba(28,26,20,0.08);
+    border-radius: 2px;
+    pointer-events: none;
+  }
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--paper-edge);
+  }
+  .card-meta {
+    font-family: 'Fraunces', serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    line-height: 1.8;
+  }
+  .card-meta .label { color: var(--terracotta-deep); }
+  .card-num {
+    font-family: 'Fraunces', serif;
+    font-size: 11px;
+    color: var(--ink-faint);
+    letter-spacing: 0.1em;
+    text-align: right;
+  }
+  .card-num em {
+    display: block;
+    font-style: italic;
+    font-size: 32px;
+    color: var(--ink-faint);
+    line-height: 1;
+    margin-top: 4px;
+  }
+  .card-section {
+    margin-bottom: 1.75rem;
+  }
+  .card-section:last-of-type { margin-bottom: 0; }
+  .section-label {
+    font-family: 'Fraunces', serif;
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-label::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--paper-edge);
+  }
+  .original {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink-mute);
+    line-height: 1.5;
+    padding-left: 14px;
+    border-left: 2px solid var(--paper-edge);
+  }
+  .validation {
+    font-family: 'Newsreader', serif;
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  .analogy {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.4;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    font-variation-settings: "opsz" 72, "SOFT" 100;
+  }
+  .analogy::first-letter {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 56px;
+    float: left;
+    line-height: 0.85;
+    margin: 6px 8px 0 0;
+    color: var(--terracotta-deep);
+    font-style: italic;
+  }
+  .action {
+    font-family: 'Newsreader', serif;
+    font-size: 17px;
+    color: var(--ink);
+    line-height: 1.5;
+    background: rgba(111,123,90,0.10);
+    padding: 14px 18px;
+    border-radius: 2px;
+    border-left: 2px solid var(--sage);
+  }
+  .action::before {
+    content: "→ ";
+    color: var(--sage-deep);
+    font-weight: 500;
+  }
+  .ornament {
+    text-align: center;
+    color: var(--ink-faint);
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    margin: 0.5rem 0;
+    letter-spacing: 0.5em;
+  }
+  .card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 1.75rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--paper-edge);
+  }
+  .card-btn {
+    background: transparent;
+    border: 1px solid var(--ink-faint);
+    color: var(--ink-soft);
+    font-family: 'Fraunces', serif;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 7px 14px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 160ms ease;
+  }
+  .card-btn:hover {
+    border-color: var(--ink);
+    color: var(--ink);
+    background: var(--paper-deep);
+  }
+
+  /* ---------- HISTORY ---------- */
+  .history-section {
+    max-width: 720px;
+    margin: 4rem auto 0;
+    padding: 0 1.5rem;
+  }
+  .history-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 1.5rem;
+  }
+  .history-title {
+    font-family: 'Fraunces', serif;
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  .history-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--ink-faint);
+  }
+  .history-clear {
+    background: none;
+    border: none;
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink-mute);
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: var(--ink-faint);
+    text-underline-offset: 3px;
+  }
+  .history-clear:hover { color: var(--terracotta-deep); }
+  .history-list {
+    display: grid;
+    gap: 12px;
+  }
+  .history-item {
+    background: var(--paper-deep);
+    border: 1px solid var(--paper-edge);
+    border-radius: 3px;
+    padding: 14px 18px;
+    cursor: pointer;
+    transition: all 160ms ease;
+  }
+  .history-item:hover {
+    border-color: var(--ink-faint);
+    background: var(--paper);
+  }
+  .history-thought {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  .history-meta {
+    font-family: 'Fraunces', serif;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-top: 6px;
+  }
+  .history-meta .dot { margin: 0 8px; color: var(--ink-faint); }
+  .history-empty {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--ink-mute);
+    text-align: center;
+    padding: 1.5rem 0;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    max-width: 720px;
+    margin: 4rem auto 0;
+    padding: 2rem 1.5rem 0;
+    border-top: 1px solid var(--paper-edge);
+    text-align: center;
+    font-family: 'Newsreader', serif;
+    font-size: 13px;
+    color: var(--ink-mute);
+    line-height: 1.7;
+  }
+  footer p { margin-bottom: 6px; }
+  footer a { color: var(--terracotta-deep); text-decoration-color: var(--ink-faint); text-underline-offset: 3px; }
+  footer .privacy {
+    font-style: italic;
+    font-size: 12px;
+    color: var(--ink-faint);
+    margin-top: 14px;
+  }
+
+  /* ---------- ANIMATIONS ---------- */
+  @keyframes rise-in {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* ---------- MOBILE ---------- */
+  @media (max-width: 600px) {
+    header { padding: 2rem 1rem 1rem; }
+    main, .history-section, footer { padding-left: 1rem; padding-right: 1rem; }
+    .composer, .card { padding: 1.5rem 1.25rem; }
+    .controls { flex-direction: column; align-items: stretch; gap: 1rem; }
+    .tone-group { flex-wrap: wrap; }
+    .submit { width: 100%; }
+    .analogy { font-size: 19px; }
+    .analogy::first-letter { font-size: 44px; }
+    textarea { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="crest">
+    <span class="crest-line"></span>
+    <span>Margin Notes</span>
+    <span class="crest-line"></span>
+  </div>
+  <h1>For the thoughts<br/>that need a <em>kinder pen</em>.</h1>
+  <p class="tagline">A quiet desk for rephrasing what your mind has misfiled as fact.</p>
+  <div class="header-rule"></div>
+</header>
+
+<main>
+  <div class="composer">
+    <label class="composer-label" for="thought">What's the thought weighing on you?</label>
+    <textarea id="thought" placeholder="Write it as you'd say it to yourself. No need to soften it for me."></textarea>
+    <div class="controls">
+      <div class="tone-group">
+        <span class="tone-label">Tone</span>
+        <button class="chip" data-tone="gentle">gentle</button>
+        <button class="chip active" data-tone="grounded">grounded</button>
+        <button class="chip" data-tone="bold">bold</button>
+      </div>
+      <button class="submit" id="submit">Reframe →</button>
+    </div>
+  </div>
+
+  <div class="card-wrap" id="card-wrap"></div>
+</main>
+
+<section class="history-section" id="history-section">
+  <div class="history-header">
+    <span class="history-title">Past Notes</span>
+    <span class="history-rule"></span>
+    <button class="history-clear" id="history-clear">clear all</button>
+  </div>
+  <div class="history-list" id="history-list"></div>
+</section>
+
+<footer>
+  <p>Margin Notes is a small companion, not a therapist.</p>
+  <p>If you're in crisis, please reach out — <a href="https://findahelpline.com" target="_blank" rel="noopener">find a helpline</a> · <a href="https://www.iasp.info/resources/Crisis_Centres/" target="_blank" rel="noopener">international list</a></p>
+  <p class="privacy">Your thoughts never leave this device. No accounts, no servers, no tracking.</p>
+</footer>
+
+<script>
+/* ===========================================================
+   CONTENT LIBRARY
+   The whole product lives in this object.
+   =========================================================== */
+const LIBRARY = {
+
+  catastrophizing: {
+    label: "Catastrophizing",
+    description: "Treating a setback as a disaster",
+    patterns: [
+      /\b(ruined|disaster|catastroph|terrible|awful|horrible|worst|nightmare)\b/,
+      /\b(everything is|all is|nothing will|it's all|its all)\s.*(over|lost|wrong|broken|gone)\b/,
+      /\bmy (life|world|everything|future|career|marriage|relationship) (is|'?s) (over|done|finished|ruined|lost|gone)\b/,
+      /\b(end of (the world|me|everything)|i'?m doomed|i'?m finished|i'?m screwed)\b/,
+      /\bcan'?t (handle|cope|survive|deal)\b/
+    ],
+    validations: {
+      gentle: [
+        "What you're feeling is heavy, and it's real. The weight is allowed to be here.",
+        "It makes sense that this hit hard. You don't have to talk yourself out of it.",
+        "This feels enormous right now, and that feeling is honest."
+      ],
+      grounded: [
+        "The fear is real, and it's also wearing the costume of certainty. Both can be true.",
+        "Something genuinely went wrong. Your mind is just turning the volume up past the actual signal.",
+        "The feeling is a fact. The forecast it's making isn't."
+      ],
+      bold: [
+        "Yes — this is genuinely hard. No — it isn't the apocalypse your nervous system is selling you.",
+        "Heavy is heavy. Heavy is also temporary. Both things are true at once.",
+        "You're allowed to be devastated. You're not required to also be psychic."
+      ]
+    },
+    analogies: [
+      "Your mind is a weather forecaster that calls every cloud a hurricane. When every storm is the apocalypse, you can't tell the real ones from the passing ones — and right now, the forecast is overdue for recalibration.",
+      "In the dark, every coat hung on a door looks like a stranger standing in the room. Turn on a small light. You'll find fabric.",
+      "This is a magnifying glass held over an ant. The ant is real. It is not the size of your shadow.",
+      "Sailors used to write \"here be dragons\" at the edge of the map. It wasn't because dragons were there. It was because they hadn't been there yet.",
+      "A single domino has fallen, and your mind is sketching a chain that runs to the horizon. Most chains don't. Most dominoes are just a domino."
+    ],
+    actions: [
+      "Write three versions of how this could go: worst, best, most likely. Read all three.",
+      "Ask: \"If a friend told me this exact thing, what would I actually say to them?\"",
+      "Name one specific, concrete thing — not a feeling — that has actually happened. Just one."
+    ]
+  },
+
+  allOrNothing: {
+    label: "All-or-nothing",
+    description: "Seeing things in absolutes — always, never, totally",
+    patterns: [
+      /\b(always|never|every time|nothing ever|no one ever|everyone always)\b/,
+      /\b(totally|completely|absolutely|utterly)\s+(failed|wrong|bad|broken|ruined|useless|hopeless)\b/,
+      /\b(perfect|flawless)\b.*\b(or|otherwise|else)\b/,
+      /\bnot good enough\b/
+    ],
+    validations: {
+      gentle: [
+        "It's understandable to want a clean answer. Most of life isn't shaped that way, and that can be tiring.",
+        "When something hurts, the mind reaches for the biggest word it can find. That makes sense.",
+        "This is a tough day. You don't need to argue with that to also see it more softly."
+      ],
+      grounded: [
+        "\"Always\" and \"never\" are quick words for messy situations. They're rarely accurate, even when they're sincere.",
+        "The disappointment is real. The size your mind has assigned it is worth a second look.",
+        "One bad result isn't the same as a pattern. It's just the most recent result."
+      ],
+      bold: [
+        "\"Always\" and \"never\" are lazy words. You're sharper than they are.",
+        "If \"every time\" were true, you'd be in a coma by now. You aren't. Adjust.",
+        "One data point is a dot. It is not a line."
+      ]
+    },
+    analogies: [
+      "A black-and-white photograph of a sunset is still a sunset. You're throwing out the color and calling the photo wrong.",
+      "A dimmer switch isn't broken because it isn't fully on. Most of life happens in the middle of the dial, and most of it is enough.",
+      "Bread that didn't rise perfectly is still bread. Toast it with butter — it will feed someone tomorrow morning.",
+      "A pianist hits a wrong note. The music doesn't stop being music. It keeps going, and so does the audience.",
+      "A river is not a failure for bending. The straight line was your idea, not the river's."
+    ],
+    actions: [
+      "Find the word \"always\" or \"never\" in your sentence. Replace it with \"sometimes.\" Read it again.",
+      "List one thing about today that went 30% right. Thirty percent counts.",
+      "Write the gray version. Not the worst, not the best — the actual middle."
+    ]
+  },
+
+  selfLabeling: {
+    label: "Self-labeling",
+    description: "Calling yourself a name based on a moment",
+    patterns: [
+      /\bi'?m (a |an |such a |so )?(stupid|dumb|idiot|loser|failure|worthless|useless|pathetic|broken|ugly|fat|lazy|weak|terrible|awful|bad)\b/,
+      /\bi'?m (not (good|smart|worthy|enough|talented|capable))\b/,
+      /\bi (suck|hate myself|despise myself|can'?t do anything)\b/,
+      /\bi'?ll never (be|amount|matter|succeed)\b/,
+      /\bi'?m (the )?worst\b/
+    ],
+    validations: {
+      gentle: [
+        "Something must have hurt for you to reach for a word that hard about yourself. I'm sorry it does.",
+        "That's a heavy verdict to hand to yourself. It's okay to set it down for a moment, even if you can't believe me yet.",
+        "You don't have to feel different right now. I just want to gently note: that label is bigger than what actually happened."
+      ],
+      grounded: [
+        "What you said is a label. What happened is an event. Those are different sizes, and your mind has confused them.",
+        "You're not the noun. You're the person who had the bad afternoon.",
+        "Calling yourself \"worthless\" is a verdict. You don't have evidence to convict — you have a hard day."
+      ],
+      bold: [
+        "You aren't your worst hour. Don't sign your name to it.",
+        "That label fits no one. Especially not someone who is still trying — and you wouldn't be reading this if you weren't.",
+        "The judge in your head is using last decade's evidence and reading it badly. Mistrial."
+      ]
+    },
+    analogies: [
+      "A violin in a closet isn't a useless violin. It's a violin nobody picked up today.",
+      "Pearls are made by oysters that swallowed grit they couldn't get rid of. The thing you hate most about today might be the thing that quietly compounds into something you don't yet recognize.",
+      "A book judged by its dustiest chapter is a book never finished. You are, at minimum, still being written.",
+      "The word \"worthless\" is a verdict. It needs evidence. A hard afternoon is not evidence — it's weather.",
+      "A garden isn't a failure in February. It's just February. Things are happening underground that you can't see yet.",
+      "You wouldn't call a plant lazy for not blooming in winter. Stop doing it to yourself."
+    ],
+    actions: [
+      "Write the thought down. Then write what you'd say to a friend who said the exact same words.",
+      "List three small things you actually did today. Especially small ones. Especially the ones that didn't feel like they counted.",
+      "Take that label off. You don't have to replace it with anything. Just put it down for an hour."
+    ]
+  },
+
+  mindReading: {
+    label: "Mind-reading",
+    description: "Assuming you know what others are thinking",
+    patterns: [
+      /\b(they|he|she|everyone|nobody|no one|everybody) (really |actually |genuinely |truly |secretly )?(thinks?|hates?|judges?|doesn'?t (like|care))\b/,
+      /\b(nobody|no one|everyone|everybody|people|they) (really |actually )?(likes?|loves?|wants?|cares? about|respects?|notices?|gets?)\s+me\b/,
+      /\bi (know|can tell) (they|he|she|everyone) (think|feel|don'?t)\b/,
+      /\b(must think|probably thinks?|definitely thinks?)\b/,
+      /\bjudging me\b/
+    ],
+    validations: {
+      gentle: [
+        "It hurts to imagine being seen poorly, even when it's only imagined. The hurt is real either way.",
+        "Caring what people think isn't a flaw. It's part of being a person near other people.",
+        "It's tiring to carry a story you didn't ask to write."
+      ],
+      grounded: [
+        "You're treating a guess like a transcript. The feeling is real; the source you're quoting isn't.",
+        "Most of what we attribute to others is a confession of what we fear they see.",
+        "The story you've written about what they're thinking is more vivid than anything they actually said."
+      ],
+      bold: [
+        "You are guessing, and then getting upset at your own guess.",
+        "If you can't quote them, you don't know. You're upset at fiction you wrote.",
+        "Stop being a reporter on a story that hasn't happened. Wait for the source."
+      ]
+    },
+    analogies: [
+      "You're writing other people's diaries for them, then getting upset at what they wrote.",
+      "Everyone is mostly thinking about the angle of their own face in the photo. The photo isn't of you.",
+      "You're sitting in a director's chair that isn't yours, second-guessing a scene they didn't even shoot.",
+      "Imagine reading mail addressed to someone else and being hurt by it. The mind-read is exactly that — opening a letter that was never written.",
+      "You're translating from a language nobody spoke."
+    ],
+    actions: [
+      "Write down what you think they're thinking. Now write the actual evidence — direct words, not tone or glance. Compare.",
+      "Ask one clarifying question to the person, if you safely can. \"Hey — was something off earlier?\" beats hours of guessing.",
+      "Hold the assumption loosely. Say to yourself: \"That's one possible read, not the only one.\""
+    ]
+  },
+
+  fortuneTelling: {
+    label: "Fortune-telling",
+    description: "Predicting the future as if it's already happened",
+    patterns: [
+      /\bi'?ll (never|always|definitely|just|probably) (fail|lose|mess up|disappoint|ruin|never get|never be)\b/,
+      /\b(it won'?t work|it'?ll fail|nothing will work|i'?ll regret)\b/,
+      /\b(there'?s no point|why bother|it'?s pointless)\b/,
+      /\bgoing to (fail|hate|reject|leave|lose)\b/
+    ],
+    validations: {
+      gentle: [
+        "It makes sense to brace for hurt before it arrives. That's the mind trying to protect you, even when it overshoots.",
+        "Wanting to know the ending in advance is so human. The not-knowing is uncomfortable.",
+        "Predicting the worst can feel safer than hoping. I get it."
+      ],
+      grounded: [
+        "You're describing the future with the certainty of a memory. Memories belong to things that have happened.",
+        "A prediction is not a plan. And a prediction isn't proof, no matter how confident it sounds.",
+        "Your mind is treating a forecast like a fact. It isn't one yet."
+      ],
+      bold: [
+        "You haven't been to tomorrow. Stop reporting back from it.",
+        "You are reading the last page of a book that hasn't been written.",
+        "A forecast is not a fact. The weatherman isn't always right and neither are you."
+      ]
+    },
+    analogies: [
+      "You're reading the last page of a book that hasn't been written yet.",
+      "A weather report from a stranger who has never seen tomorrow.",
+      "A seed in the soil doesn't know what it'll become. Asking it is asking the wrong thing — the soil and the sun have a vote.",
+      "You've already booked the funeral for a future that hasn't even gotten dressed yet.",
+      "Imagine handing a verdict to a jury before the trial begins. That's what fortune-telling is — sentencing without evidence."
+    ],
+    actions: [
+      "Write the prediction. Then write: \"...and I don't actually know that yet.\" Read both.",
+      "Pick the smallest possible next step — five minutes worth — and do only that. Tomorrow can stay tomorrow.",
+      "List one time your worst prediction was wrong. Just one. That's enough to weaken the pattern."
+    ]
+  },
+
+  personalization: {
+    label: "Personalization",
+    description: "Making yourself the cause of things outside your control",
+    patterns: [
+      /\b(my fault|all my fault|because of me|i caused|i made (them|him|her|it))\b/,
+      /\bi (should have|shouldn'?t have)\b.*\b(known|seen|stopped|prevented|saved|fixed)\b/,
+      /\bif only i (had|hadn'?t)\b/,
+      /\bi let (everyone|them|him|her|down)\b/
+    ],
+    validations: {
+      gentle: [
+        "Caring this much is part of why people trust you. It's also exhausting to carry what isn't yours.",
+        "The desire to have prevented this is love. The blame attached to it isn't fair.",
+        "It's okay that this hurts. Hurting doesn't mean it's your fault."
+      ],
+      grounded: [
+        "You're taking on weight that doesn't have your name on it.",
+        "Other people have agency. The outcome is theirs too — most of it, usually.",
+        "The fact that you wish you could have stopped it isn't the same as you having caused it."
+      ],
+      bold: [
+        "You are not the only variable in this equation. Stop solving for yourself like you are.",
+        "Other people made other choices. Their consequences are not your tab to pick up.",
+        "You weren't the wind, the weather, or the will of everyone involved. Hand back what isn't yours."
+      ]
+    },
+    analogies: [
+      "You're holding an umbrella over a city and apologizing to everyone who's still wet.",
+      "A single thread doesn't weave the whole tapestry. The pattern was already there before you walked in.",
+      "A pebble doesn't turn the river. It can change a small eddy. It cannot move the current.",
+      "You're charging yourself with a crime you didn't have the equipment to commit.",
+      "You're standing under a falling tree and apologizing for the wind."
+    ],
+    actions: [
+      "List every person and factor involved in this outcome. Notice how many names are not yours.",
+      "Write the sentence: \"I contributed ___% to this.\" Pick a number. Most are smaller than you'd expect.",
+      "Ask: \"What would I say if a friend told me they were the entire cause of this?\""
+    ]
+  },
+
+  discountingPositives: {
+    label: "Discounting positives",
+    description: "Dismissing good things as not counting",
+    patterns: [
+      /\b(doesn'?t count|didn'?t really|just (got )?lucky|that doesn'?t mean|anyone could)\b/,
+      /\b(was (just|only)|only because|just because)\b.*\b(luck|easy|nothing|small)\b/,
+      /\b(yeah but|but it'?s|but i still|but really)\b/,
+      /\bnot a real\b/
+    ],
+    validations: {
+      gentle: [
+        "Receiving good things can feel risky when you're used to bracing. It's okay if it's hard.",
+        "There's nothing wrong with you for not feeling proud. The feeling will get easier with practice.",
+        "The win you're discounting is still real, even if it doesn't feel like one yet."
+      ],
+      grounded: [
+        "You're keeping books that only record losses. The math is wrong because the ledger is.",
+        "The wins are real. Refusing to count them doesn't make them not happen.",
+        "If a friend pulled this off, you wouldn't call it luck. Use the same standard for yourself."
+      ],
+      bold: [
+        "You are cooking the books on yourself. Stop.",
+        "Luck doesn't show up that consistently for one person. Some of it was you.",
+        "If you keep deleting the wins, the only data you'll have is the losses. Don't be surprised when the report looks bleak."
+      ]
+    },
+    analogies: [
+      "A bank statement that only counts withdrawals will always show you're broke.",
+      "You're tossing every gold coin you find back into the sea because it isn't a chest.",
+      "The garden you walked through this morning — you noticed only the weeds. The roses were also there.",
+      "A judge who only allows the prosecution to speak will always reach a guilty verdict.",
+      "If you delete every photo where you smiled, of course the album looks grim."
+    ],
+    actions: [
+      "Write down the win. Without the \"but.\" Just the win. Sit with the discomfort for ten seconds.",
+      "Tell one person one good thing that happened. Out loud. Watch them treat it as real.",
+      "Make a small list: three things that went right this week. They count even if they were small. Especially if they were small."
+    ]
+  },
+
+  shouldStatements: {
+    label: "Should statements",
+    description: "Punishing yourself with rules about how you ought to be",
+    patterns: [
+      /\bi (should|shouldn'?t|ought to|must|have to)\b/,
+      /\b(supposed to|expected to|need to be)\b/,
+      /\bwhy can'?t i (just|ever)\b/,
+      /\bwhat'?s wrong with me\b/
+    ],
+    validations: {
+      gentle: [
+        "The standards you hold yourself to come from somewhere — usually from caring. The cost of that caring is allowed to be visible.",
+        "It's tiring to live under so many invisible rules. You don't have to justify the tiredness.",
+        "You haven't failed by being human. You're just human."
+      ],
+      grounded: [
+        "\"Should\" is a small word with a long shadow. Most of what it points at, you couldn't have done differently with what you knew at the time.",
+        "Beating yourself up for what already happened is a tax on a transaction you can't reverse.",
+        "The rule you're breaking isn't a law. It's a habit of self-judgment."
+      ],
+      bold: [
+        "\"Should\" is an invoice mailed to your past self. It can't be paid. Tear it up.",
+        "The trial is over. The verdict was passed. Sentencing yourself again is unpaid overtime.",
+        "Stop measuring today against a version of you who had information you didn't have yet."
+      ]
+    },
+    analogies: [
+      "The word \"should\" is an invoice mailed to your past self. It can't be paid. Tear it up.",
+      "There is the first arrow — what happened. There is the second arrow — the one you fire at yourself for being hit. Stop firing the second one.",
+      "You wouldn't audit a child for not knowing calculus. You're auditing a past version of yourself for not knowing what only this version knows now.",
+      "A coach who only screams \"you should have\" never produced a champion. They produced flinchers. Be a kinder coach.",
+      "\"Should\" is the architect of houses no one lives in."
+    ],
+    actions: [
+      "Replace \"I should\" with \"I'd like to\" or \"It would be nice if I.\" Read it. Notice the difference in your shoulders.",
+      "List one thing you actually did today instead of what you should have. Just one real action.",
+      "Forgive your past self the way you'd forgive a friend who didn't yet know what you know now."
+    ]
+  },
+
+  comparison: {
+    label: "Comparison",
+    description: "Measuring yourself against someone else's edited surface",
+    patterns: [
+      /\b(everyone( else)?|other people)\s+(is|are|has|have|seems|seem)\b.*\b(better|further|happier|smarter|richer|ahead|more)\b/,
+      /\b(everyone|others|other people)\s+(is|are)\s+doing\s+(better|more|fine|great|well)\b/,
+      /\b(why am i not|why can'?t i be) (more )?like\b/,
+      /\b(behind|falling behind|so far behind)\b/,
+      /\bcompared to\b/
+    ],
+    validations: {
+      gentle: [
+        "Comparison hurts. It's not a flaw to feel it — it's part of being a person who notices other people.",
+        "It's hard to want what someone else seems to have. The wanting itself is allowed.",
+        "Your timeline isn't a race you signed up for. It's okay if it doesn't move at the same pace."
+      ],
+      grounded: [
+        "You're comparing your behind-the-scenes to someone else's highlight reel. The math will always be wrong.",
+        "You don't have the full footage. You're judging yourself against a trailer.",
+        "Different soils, different seeds, different seasons. The comparison was never fair to begin with."
+      ],
+      bold: [
+        "You are running someone else's race in your own shoes and wondering why it doesn't fit.",
+        "Their highlight reel is not their life. Yours isn't either. Stop scoring movies against documentaries.",
+        "If their path were yours, you'd already be on it. Theirs isn't yours. Get back to your own."
+      ]
+    },
+    analogies: [
+      "You're comparing your behind-the-scenes to their highlight reel. Of course you look bad — you're using the wrong footage.",
+      "A fish judging itself for being a worse climber than a monkey.",
+      "You're looking at a tree's height while standing on its roots. You don't see what holds it up.",
+      "Two seeds planted on the same day will not bloom on the same day. Neither one is failing.",
+      "A clock at the airport tells the wrong time for everyone except the people in that timezone. You're reading someone else's clock."
+    ],
+    actions: [
+      "Close the app, the page, the feed where the comparison started. Just for an hour.",
+      "Write down one thing you have that the person you're comparing yourself to doesn't visibly have. (You'd be surprised.)",
+      "Ask: \"Would I trade my entire life — not just the parts I envy, the entire life — for theirs?\""
+    ]
+  },
+
+  imposter: {
+    label: "Imposter feelings",
+    description: "Feeling like a fraud despite real evidence of competence",
+    patterns: [
+      /\b(don'?t deserve|undeserving|don'?t belong|out of (my|its) league)\b/,
+      /\b(fraud|fake|imposter|pretending|faking it)\b/,
+      /\b(they'?ll find out|they'?ll realize|when they figure out)\b/,
+      /\b(got lucky|just lucky|fluke|by accident)\b.*\b(here|made it|succeeded|got)\b/
+    ],
+    validations: {
+      gentle: [
+        "Feeling like you don't belong somewhere you've earned your place is one of the loneliest feelings. I'm sorry it visits you.",
+        "The fact that you're worried about being a fraud is, ironically, a quality frauds rarely have.",
+        "It's okay to not feel ready. Most people who do good work didn't feel ready either."
+      ],
+      grounded: [
+        "You're holding yourself to a standard that says \"feel certain or be a fraud.\" Almost nobody passes that test.",
+        "Competence and confidence are two different muscles. You can have one without the other for a long time.",
+        "The voice calling you a fraud is loud, but it isn't well-informed."
+      ],
+      bold: [
+        "Real frauds don't worry about being frauds. The worry is, frankly, a credential.",
+        "You got here. The door let you in. The door was not wrong.",
+        "If you were faking it this well, that's still a skill. But you're not faking it — you're just early in believing it."
+      ]
+    },
+    analogies: [
+      "Even the chef who cooked the wedding meal once burned toast. Their chef coat was earned by showing up after burning the toast — not before.",
+      "Every expert has a folder of work they hope no one ever finds. The folder is part of the qualification, not a disqualification.",
+      "A door that opens for you is a door. You don't have to apologize to it for using your hand.",
+      "The seasoned actor still gets stage fright. The fright isn't proof they shouldn't be on stage — it's proof the stage matters.",
+      "A bridge doesn't ask permission of the river to be a bridge. It just holds. You're holding."
+    ],
+    actions: [
+      "Write down three pieces of actual evidence — concrete, specific — that you belong where you are. \"I was hired.\" \"They asked me back.\" Receipts.",
+      "Ask one trusted person what they think your strengths are. Don't argue with their answer. Just write it down.",
+      "Do the next small thing your role asks of you. Belonging is built by doing, not by feeling."
+    ]
+  },
+
+  general: {
+    label: "A heavy moment",
+    description: "Catch-all for unmatched thoughts",
+    patterns: [],
+    validations: {
+      gentle: [
+        "Whatever brought you here was real. You don't have to perform okay-ness for me.",
+        "It's enough to put the thought down here. That itself takes something.",
+        "You don't have to defend the feeling. It's allowed to be exactly what it is."
+      ],
+      grounded: [
+        "Whatever the shape of the thought, the voice carrying it is being harsher than the situation requires.",
+        "You're being interrogated by a part of your mind that doesn't have all the evidence.",
+        "The story you're telling yourself is louder than the facts underneath it."
+      ],
+      bold: [
+        "The voice you're using on yourself wouldn't survive five minutes if you used it on a friend.",
+        "You're prosecutor, judge, and jury here — and none of them are being fair.",
+        "Your inner critic is talking like it has tenure. It doesn't."
+      ]
+    },
+    analogies: [
+      "You're holding yourself up to a candle and complaining about the shadows. That's what candles do — they make shadows. The shadow isn't who you are.",
+      "Reading one page of a long novel and reviewing the whole book — that's what your mind is doing with this moment.",
+      "A wave doesn't apologize for being a wave. It rises, it crashes, it returns. So do you.",
+      "The mirror you're using is fogged with the breath of a hard day. The reflection doesn't change — only the visibility.",
+      "You're the only one keeping score this strictly. Everyone else has long since put down the scoreboard.",
+      "A clock running fast doesn't mean time has sped up. It just means the clock needs adjusting. So does the voice in your head right now."
+    ],
+    actions: []
+  }
+};
+
+/* ===========================================================
+   TEMPLATES — placeholder-driven content that adapts to the
+   user's specific words. Filled in only when the matching
+   tokens are present; otherwise we fall back to LIBRARY.
+   =========================================================== */
+const TEMPLATES = {
+
+  selfLabeling: {
+    validations: {
+      gentle: [
+        "'{trait}' is a heavy word to put on yourself. You don't have to wear it today.",
+        "Calling yourself {trait} hurts. The hurt is real even if the word isn't right.",
+        "It must be a tired moment for the word '{trait}' to feel honest. I'm sorry it's tired."
+      ],
+      grounded: [
+        "'{trait}' is a label. Labels are smaller than people. The label fit a moment — not your name.",
+        "You're not {trait}. You're the person who, on a hard day, reached for that word. Those are different people.",
+        "Verdicts need evidence. '{trait}' is a verdict; a difficult hour is weather."
+      ],
+      bold: [
+        "You wouldn't call your closest friend {trait}. Don't accept it from your own mouth.",
+        "'{trait}' is loud, not credible. Loud isn't the same as true.",
+        "Take the label '{trait}' off. You don't owe the word a hearing."
+      ]
+    },
+    analogies: [
+      "A {role} who worries about being a {trait} {role} is, almost by definition, not what they fear. The genuinely {trait} ones don't ask the question.",
+      "If you were truly {trait}, you wouldn't be reading this. The very fact that you're trying to see yourself differently is evidence against the word.",
+      "'{trait}' is a costume a tired part of your mind handed you. It doesn't fit. You can take it off when you're ready.",
+      "A {role}'s worth isn't measured by the worst hour. Even seasoned {role}s have hours they'd rather forget. The hour isn't the {role}.",
+      "Imagine reviewing a whole novel after reading one bad chapter. The thought 'I'm {trait}' is doing exactly that to you.",
+      "'{trait}' is a sentence the inner judge handed down with no jury and no evidence — just a hard hour. That's a mistrial, not a verdict.",
+      "The good {role}s are the ones who worry about being {trait} {role}s. The careless ones never ask. You're asking — that says something."
+    ]
+  },
+
+  comparison: {
+    validations: {
+      gentle: [
+        "It's hard to feel behind. The longing to be where someone else seems to be is human.",
+        "Watching others move ahead hurts. That hurt doesn't mean you're failing — it means you care."
+      ],
+      grounded: [
+        "You're measuring your draft against their final cut. Your draft is rougher because all drafts are.",
+        "Their story isn't yours, and yours isn't theirs. The comparison was never fair."
+      ],
+      bold: [
+        "You don't have their backstage footage. Stop scoring movies against documentaries.",
+        "Their life isn't yours and never will be. Wanting it is like trying to wear someone else's shoes uphill."
+      ]
+    },
+    analogies: [
+      "You're comparing your behind-the-scenes to their highlight reel. Of course you look behind — you're using the wrong footage.",
+      "Two timelines do not run at the same speed. Yours moves at yours. Theirs moves at theirs. There is no shared finish line.",
+      "The life you envy probably envies someone else's. The grass is greener everywhere except where you're standing — that's just how grass looks from a distance.",
+      "A clock in another timezone tells the wrong time for everyone except the people there. You're reading someone else's clock and wondering why you feel late."
+    ]
+  },
+
+  imposter: {
+    validations: {
+      gentle: [
+        "Doubting whether you belong as a {role} is one of the loneliest feelings. I'm sorry it visits.",
+        "Feeling like a fake {role} doesn't mean you are one. It often means you take it seriously."
+      ],
+      grounded: [
+        "You're a {role} who doubts whether you're a real {role}. That doubt is, ironically, what real {role}s carry.",
+        "If you were faking being a {role}, you'd have stopped showing up by now. You haven't."
+      ],
+      bold: [
+        "Real frauds don't worry about being frauds. The worry, frankly, is a credential.",
+        "The {role}s who are certain of themselves are the ones to watch warily. Your doubt is a feature."
+      ]
+    },
+    analogies: [
+      "Every {role} has a folder of work they hope no one ever finds. The folder is part of being a {role} — not a reason to disqualify.",
+      "A {role} on their first day still earned the title. The title isn't issued at the finish line. It's issued at the start.",
+      "The seasoned {role} still sometimes feels like the beginner {role}. The feeling doesn't shrink. You just learn to walk with it.",
+      "A door opened for you and called you a {role}. The door wasn't wrong. You just haven't caught up to the door yet."
+    ]
+  },
+
+  allOrNothing: {
+    validations: {
+      gentle: [
+        "The word '{absolute}' feels honest when something hurts. It's allowed to feel that way, even when it isn't quite.",
+        "Living with '{absolute}' running through everything is exhausting. You don't have to argue with it right now."
+      ],
+      grounded: [
+        "'{absolute}' is doing more work in that sentence than the evidence is asking it to do.",
+        "'{absolute}' is a shortcut the tired mind takes. The shortcut skips most of what's actually true."
+      ],
+      bold: [
+        "'{absolute}' is a lazy word. You're sharper than that.",
+        "If '{absolute}' were true, you'd have other evidence by now. You don't. Adjust the word."
+      ]
+    },
+    analogies: [
+      "You said '{absolute}'. Test it: is there even one exception? Usually there are dozens. '{absolute}' falls apart on contact with the actual data.",
+      "'{absolute}' is what the mind reaches for when nuance feels too heavy. But nuance is where you actually live.",
+      "Replace '{absolute}' with 'sometimes' and reread the sentence. Notice how the air comes back into the room.",
+      "Life doesn't run on '{absolute}'. It runs on most-of-the-time, sometimes, often-enough. '{absolute}' is fiction the mind tells itself to feel certain."
+    ]
+  },
+
+  fortuneTelling: {
+    validations: {
+      gentle: [
+        "Bracing for the worst can feel safer than hoping. I understand why.",
+        "Wanting to know how this ends — just to stop the not-knowing — is so human."
+      ],
+      grounded: [
+        "You're describing your future with the certainty of a memory. It isn't one yet.",
+        "A prediction is a feeling wearing a fact's clothing. Don't let it pass as evidence."
+      ],
+      bold: [
+        "You haven't been to next week. Stop reporting back from it.",
+        "Forecasting failure isn't realism. It's pre-grieving something that hasn't happened."
+      ]
+    },
+    analogies: [
+      "You're already grieving an outcome that hasn't been filed yet. The grief is real. The verdict isn't.",
+      "You're reading the last page of a book you haven't written. The middle is where everything actually happens.",
+      "Your future is unwritten. The pen is in your hand and the page is blank. The story you're telling yourself about it is one of many you could write."
+    ]
+  },
+
+  general: {
+    validations: {
+      gentle: [
+        "The thought '{phrase}' is sitting heavy. You don't have to argue with it right now — you can just let it be heard."
+      ],
+      grounded: [
+        "You wrote '{phrase}'. That's what your mind reached for. Words like that come on hard days, and they pass too."
+      ],
+      bold: [
+        "'{phrase}' is what your mind handed you. You're allowed to hand it back."
+      ]
+    },
+    analogies: [
+      "The phrase '{phrase}' feels permanent right now. Heavy thoughts almost always do. Ask the thoughts you had this time last year — most have quietly moved on without you."
+    ]
+  }
+};
+
+/* ===========================================================
+   TOKEN EXTRACTION — pulls user-specific words for templates
+   =========================================================== */
+const ROLES = '(mother|mom|father|dad|parent|friend|partner|husband|wife|son|daughter|sister|brother|teacher|student|writer|artist|engineer|developer|designer|manager|leader|cook|musician|player|coach|boss|employee|worker|nurse|doctor|lawyer|founder|owner|host|speaker|presenter|man|woman|person|human|professional|intern|colleague)';
+const TRAITS = '(stupid|dumb|ugly|fat|lazy|weak|worthless|useless|pathetic|broken|terrible|awful|bad|boring|annoying|disgusting|hopeless|incompetent|unlovable|undeserving|invisible|pointless|ridiculous|disappointing|fraud|fake|failure|loser|idiot)';
+
+function extractTokens(text) {
+  const t = text.toLowerCase().trim();
+  const tokens = {};
+
+  // "I'm a terrible mother" — combo
+  const combo = t.match(new RegExp("i'?m\\s+(?:a\\s+|an\\s+|such\\s+a\\s+|so\\s+|just\\s+a\\s+|kind\\s+of\\s+a\\s+)?" + TRAITS + "\\s+" + ROLES + "\\b"));
+  if (combo) {
+    tokens.trait = combo[1];
+    tokens.role = combo[2];
+  } else {
+    // "I'm a mother"
+    const justRole = t.match(new RegExp("i'?m\\s+(?:a|an|the)\\s+" + ROLES + "\\b"));
+    if (justRole) tokens.role = justRole[1];
+    // "I'm worthless" / "I'm so stupid"
+    const justTrait = t.match(new RegExp("i'?m\\s+(?:a|an|such\\s+a|so|too|just|really)?\\s*" + TRAITS + "\\b"));
+    if (justTrait && !tokens.trait) tokens.trait = justTrait[1];
+  }
+
+  // Absolute words — always, never, etc.
+  const absMatch = t.match(/\b(always|never|every time|nothing|everyone|no one|nobody|every single)\b/);
+  if (absMatch) tokens.absolute = absMatch[1];
+
+  // Action verb (for fortune-telling, all-or-nothing)
+  const actionMatch = t.match(/\b(mess up|fail|fall short|disappoint|let down|ruin|screw up|botch|drop the ball|miss)\b/);
+  if (actionMatch) tokens.action = actionMatch[1];
+
+  // Build a "phrase" — the chunk to echo back
+  if (tokens.trait && tokens.role) {
+    tokens.phrase = `a ${tokens.trait} ${tokens.role}`;
+  } else if (tokens.trait) {
+    tokens.phrase = tokens.trait;
+  } else if (tokens.role) {
+    tokens.phrase = `a ${tokens.role}`;
+  } else {
+    // Fallback: first 8 words of input, lowercased and trimmed
+    const words = text.trim().split(/\s+/).slice(0, 8).join(' ');
+    tokens.phrase = words.length > 60 ? words.slice(0, 60) + '…' : words;
+  }
+
+  return tokens;
+}
+
+function canFillTemplate(tmpl, tokens) {
+  const placeholders = [...tmpl.matchAll(/\{(\w+)\}/g)].map(m => m[1]);
+  return placeholders.length > 0 && placeholders.every(p => tokens[p]);
+}
+
+function fillTemplate(tmpl, tokens) {
+  return tmpl.replace(/\{(\w+)\}/g, (_, k) => tokens[k] || '');
+}
+
+/* ===========================================================
+   FRESH-PICK — avoid repeating recent items in same session
+   =========================================================== */
+const RECENT_KEY = 'marginNotesRecent';
+function getRecent() {
+  try { return JSON.parse(sessionStorage.getItem(RECENT_KEY) || '{}'); }
+  catch { return {}; }
+}
+function markRecent(bucket, item) {
+  const r = getRecent();
+  r[bucket] = r[bucket] || [];
+  r[bucket].push(item);
+  if (r[bucket].length > 6) r[bucket] = r[bucket].slice(-6);
+  try { sessionStorage.setItem(RECENT_KEY, JSON.stringify(r)); } catch {}
+}
+function pickFresh(arr, bucket) {
+  const recent = (getRecent()[bucket] || []);
+  const fresh = arr.filter(x => !recent.includes(x));
+  const pool = fresh.length > 0 ? fresh : arr;
+  const choice = pool[Math.floor(Math.random() * pool.length)];
+  markRecent(bucket, choice);
+  return choice;
+}
+
+/* ===========================================================
+   TEMPLATE-AWARE PICKERS
+   =========================================================== */
+function pickAnalogy(distKey, tokens) {
+  const dist = LIBRARY[distKey];
+  const tmpls = (TEMPLATES[distKey] && TEMPLATES[distKey].analogies) || [];
+  const usable = tmpls.filter(t => canFillTemplate(t, tokens));
+  // Strongly prefer templated when usable — that's where tailoring lives
+  if (usable.length > 0 && Math.random() < 0.85) {
+    const picked = pickFresh(usable, `${distKey}-tmpl-analogy`);
+    return fillTemplate(picked, tokens);
+  }
+  return pickFresh(dist.analogies, `${distKey}-analogy`);
+}
+
+function pickValidation(distKey, tone, tokens) {
+  const dist = LIBRARY[distKey];
+  const tmpls = (TEMPLATES[distKey] && TEMPLATES[distKey].validations && TEMPLATES[distKey].validations[tone]) || [];
+  const usable = tmpls.filter(t => canFillTemplate(t, tokens));
+  if (usable.length > 0 && Math.random() < 0.75) {
+    const picked = pickFresh(usable, `${distKey}-tmpl-val-${tone}`);
+    return fillTemplate(picked, tokens);
+  }
+  return pickFresh(dist.validations[tone], `${distKey}-val-${tone}`);
+}
+
+/* ===========================================================
+   DETECTION
+   =========================================================== */
+function detect(text) {
+  const t = text.toLowerCase();
+  const scores = {};
+  for (const [key, dist] of Object.entries(LIBRARY)) {
+    let score = 0;
+    for (const pattern of dist.patterns) {
+      const matches = t.match(pattern);
+      if (matches) score += matches.length;
+    }
+    if (score > 0) scores[key] = score;
+  }
+  const ranked = Object.entries(scores)
+    .sort((a, b) => b[1] - a[1])
+    .map(([k]) => k);
+  return ranked;
+}
+
+/* ===========================================================
+   PICK & RENDER
+   =========================================================== */
+function pick(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function buildCard(thought, distortionKey, tone) {
+  const dist = LIBRARY[distortionKey];
+  const tokens = extractTokens(thought);
+  return {
+    thought,
+    distortionKey,
+    distortionLabel: dist.label,
+    tone,
+    validation: pickValidation(distortionKey, tone, tokens),
+    analogy: pickAnalogy(distortionKey, tokens),
+    timestamp: Date.now()
+  };
+}
+
+function renderCard(card) {
+  const wrap = document.getElementById('card-wrap');
+  const num = String(getHistory().length + 1).padStart(3, '0');
+  wrap.innerHTML = `
+    <div class="card" id="active-card">
+      <div class="card-header">
+        <div class="card-meta">
+          <div><span class="label">Pattern noticed:</span> ${card.distortionLabel}</div>
+          <div><span class="label">Tone:</span> ${card.tone}</div>
+        </div>
+        <div class="card-num">№<em>${num}</em></div>
+      </div>
+
+      <div class="card-section">
+        <div class="section-label">The thought</div>
+        <p class="original">"${escapeHtml(card.thought)}"</p>
+      </div>
+
+      <div class="card-section">
+        <div class="section-label">A first reading</div>
+        <p class="validation">${card.validation}</p>
+      </div>
+
+      <div class="ornament">· · ·</div>
+
+      <div class="card-section">
+        <div class="section-label">A second reading</div>
+        <p class="analogy">${card.analogy}</p>
+      </div>
+
+      <div class="card-actions">
+        <button class="card-btn" id="btn-another">Another analogy</button>
+        <button class="card-btn" id="btn-different">Try a different angle</button>
+        <button class="card-btn" id="btn-save">Save as image</button>
+        <button class="card-btn" id="btn-copy">Copy text</button>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('btn-another').onclick = () => {
+    const newCard = buildCard(card.thought, card.distortionKey, card.tone);
+    saveToHistory(newCard);
+    renderCard(newCard);
+    renderHistory();
+  };
+  document.getElementById('btn-different').onclick = () => differentAngle();
+  document.getElementById('btn-save').onclick = () => downloadCard(card);
+  document.getElementById('btn-copy').onclick = () => copyCard(card);
+}
+
+function escapeHtml(s) {
+  return s.replace(/[&<>"']/g, c => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[c]));
+}
+
+/* ===========================================================
+   STATE — track active card for "different angle" cycling
+   =========================================================== */
+let activeState = null; // { thought, ranked, idx, tone }
+
+function reframe(thought, tone) {
+  let ranked = detect(thought);
+  if (ranked.length === 0) ranked = ['general'];
+  activeState = { thought, ranked, idx: 0, tone };
+  const card = buildCard(thought, ranked[0], tone);
+  saveToHistory(card);
+  renderCard(card);
+  renderHistory();
+}
+
+function differentAngle() {
+  if (!activeState) return;
+  let nextKey;
+  if (activeState.ranked.length > 1) {
+    activeState.idx = (activeState.idx + 1) % activeState.ranked.length;
+    nextKey = activeState.ranked[activeState.idx];
+  } else {
+    // Only one match (or fallback) — pick a random different specific category
+    const current = activeState.ranked[activeState.idx];
+    const others = Object.keys(LIBRARY).filter(k => k !== current && k !== 'general');
+    nextKey = others[Math.floor(Math.random() * others.length)];
+    // Append it so further clicks rotate
+    activeState.ranked.push(nextKey);
+    activeState.idx = activeState.ranked.length - 1;
+  }
+  const card = buildCard(activeState.thought, nextKey, activeState.tone);
+  saveToHistory(card);
+  renderCard(card);
+  renderHistory();
+}
+
+/* ===========================================================
+   HISTORY
+   =========================================================== */
+const HISTORY_KEY = 'marginNotesHistory';
+function getHistory() {
+  try { return JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]'); }
+  catch { return []; }
+}
+function saveToHistory(card) {
+  const h = getHistory();
+  h.unshift(card);
+  if (h.length > 50) h.length = 50;
+  try { localStorage.setItem(HISTORY_KEY, JSON.stringify(h)); } catch {}
+}
+function clearHistory() {
+  try { localStorage.removeItem(HISTORY_KEY); } catch {}
+  renderHistory();
+}
+function renderHistory() {
+  const list = document.getElementById('history-list');
+  const h = getHistory();
+  if (h.length === 0) {
+    list.innerHTML = '<p class="history-empty">Your past notes will gather here, just for you.</p>';
+    return;
+  }
+  list.innerHTML = h.map((c, i) => `
+    <div class="history-item" data-idx="${i}">
+      <div class="history-thought">"${escapeHtml(c.thought)}"</div>
+      <div class="history-meta">
+        ${c.distortionLabel}
+        <span class="dot">·</span>
+        ${c.tone}
+        <span class="dot">·</span>
+        ${formatDate(c.timestamp)}
+      </div>
+    </div>
+  `).join('');
+
+  list.querySelectorAll('.history-item').forEach(el => {
+    el.onclick = () => {
+      const idx = parseInt(el.dataset.idx);
+      const card = getHistory()[idx];
+      // Restore activeState so "different angle" still works
+      let ranked = detect(card.thought);
+      if (ranked.length === 0) ranked = ['general'];
+      const currentIdx = ranked.indexOf(card.distortionKey);
+      activeState = {
+        thought: card.thought,
+        ranked: currentIdx >= 0 ? ranked : [card.distortionKey, ...ranked],
+        idx: currentIdx >= 0 ? currentIdx : 0,
+        tone: card.tone
+      };
+      renderCard(card);
+      window.scrollTo({ top: document.querySelector('.composer').offsetTop, behavior: 'smooth' });
+    };
+  });
+}
+function formatDate(ts) {
+  const d = new Date(ts);
+  const now = new Date();
+  const sameDay = d.toDateString() === now.toDateString();
+  const opts = sameDay
+    ? { hour: 'numeric', minute: '2-digit' }
+    : { month: 'short', day: 'numeric' };
+  return d.toLocaleString(undefined, opts);
+}
+
+/* ===========================================================
+   SAVE / COPY
+   =========================================================== */
+function downloadCard(card) {
+  const cardEl = document.getElementById('active-card');
+  // hide buttons for capture
+  const actions = cardEl.querySelector('.card-actions');
+  actions.style.display = 'none';
+  html2canvas(cardEl, {
+    backgroundColor: '#F2EBDD',
+    scale: 2,
+    useCORS: true
+  }).then(canvas => {
+    actions.style.display = '';
+    const link = document.createElement('a');
+    link.download = `margin-note-${Date.now()}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  }).catch(err => {
+    actions.style.display = '';
+    alert('Could not save image. Try copying the text instead.');
+  });
+}
+function copyCard(card) {
+  const text = `Thought: "${card.thought}"
+
+A first reading:
+${card.validation}
+
+A second reading:
+${card.analogy}
+
+— Margin Notes`;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('btn-copy');
+    const orig = btn.textContent;
+    btn.textContent = 'Copied ✓';
+    setTimeout(() => { btn.textContent = orig; }, 1600);
+  });
+}
+
+/* ===========================================================
+   WIRING
+   =========================================================== */
+let activeTone = 'grounded';
+
+document.querySelectorAll('.chip[data-tone]').forEach(c => {
+  c.onclick = () => {
+    document.querySelectorAll('.chip[data-tone]').forEach(x => x.classList.remove('active'));
+    c.classList.add('active');
+    activeTone = c.dataset.tone;
+  };
+});
+
+document.getElementById('submit').onclick = () => {
+  const text = document.getElementById('thought').value.trim();
+  if (!text) return;
+  reframe(text, activeTone);
+};
+
+document.getElementById('thought').addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+    document.getElementById('submit').click();
+  }
+});
+
+document.getElementById('history-clear').onclick = () => {
+  if (confirm('Clear all past notes? This cannot be undone.')) clearHistory();
+};
+
+renderHistory();
+</script>
+
+</body>
+</html>
